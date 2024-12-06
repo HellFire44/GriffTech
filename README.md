@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# GriffTech - Site Web Officiel  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce dépôt contient le code source du site web de mon auto-entreprise **GriffTech**.  
+Ce site a été développé en utilisant **React** et a été initialisé avec [Create React App](https://github.com/facebook/create-react-app).  
 
-## Available Scripts
+## Démarrage  
 
-In the project directory, you can run:
+Pour exécuter le projet en local, suivez ces étapes :  
 
-### `npm start`
+### Prérequis  
+Assurez-vous d'avoir les versions suivantes installées :  
+- Node.js >= 14.x  
+- npm >= 6.x  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation  
+Clonez le dépôt et installez les dépendances :  
+```bash
+git clone <url-du-dépôt>
+cd <nom-du-dossier>
+npm install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Lancer le projet
+Pour lancer le site en mode développement 
+```bash
+    npm start
+ ```
+ Cela ouvrira [http://localhost:300](http://localhost:3000) dans votre naviguateur
 
-### `npm test`
+ ### Build pour la production 
+ Pour crée une version optimisée pour la production 
+ ```bash
+ npm run build
+ ```
+ Les fichiers de production seront générés dans le dossier build.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Scripts disponibles
+Dans le répertoire du projet, vous pouvez exécuter :
 
-### `npm run build`
+- npm start : Démarre l'application en mode développement.
+- npm test : Lancer les tests en mode interactif.
+- npm run build : Génère une version optimisée pour la production.
+- npm run eject : Éjecte la configuration par défaut pour un contrôle complet (attention, cette action est irréversible).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pour plus de détails sur ces commandes, consultez la documentation officielle de [Create React App](https://github.com/facebook/create-react-app).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Fonctionnalités principales
+- Gestion des pages avec React Router.
+- Interface utilisateur moderne et réactive.
+- Optimisation pour le référencement (SEO).
