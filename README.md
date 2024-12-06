@@ -23,7 +23,7 @@ npm install
 ### Lancer le projet
 Pour lancer le site en mode développement 
 ```bash
-    npm start
+npm start
  ```
  Cela ouvrira [http://localhost:300](http://localhost:3000) dans votre naviguateur
 
