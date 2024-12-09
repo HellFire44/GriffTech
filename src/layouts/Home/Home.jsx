@@ -38,6 +38,17 @@ function Home() {
         }
     }, [isPageLoaded, textLines]);
 
+    // Fonction pour scroller vers une section spécifique
+    const handleScrollToSection = (id) => {
+        const targetElement = document.querySelector(id);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+    };
+
     return (
         <>
             <div className="layer-background">
@@ -74,10 +85,14 @@ function Home() {
                 {showButtons && (
                     <div className="button-container">
                         <Grow in={showButtons} timeout={500}>
-                            <button className="button-services">Mes Services</button>
+                            <button className="button-services" onClick={() => handleScrollToSection('#section-services')}>
+                                Mes Services
+                            </button>
                         </Grow>
                         <Grow in={showButtons} timeout={500}>
-                            <button className="button-contact">Contact</button>
+                            <button className="button-contact" onClick={() => handleScrollToSection('#section-contact')}>
+                                Contact
+                            </button>
                         </Grow>
                     </div>
                 )}

@@ -1,49 +1,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Section principale du portfolio */
 .portfolio {
-    padding: 100px 20px;
+    margin: 100px;
+    padding: 50px 20px;
     text-align: center;
 
+    /* Titre */
     h1 {
         font-family: "Kanit", sans-serif;
         font-style: italic;
         font-weight: 500;
         font-size: 64px;
-        text-transform: uppercase;
         color: white;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
         @media (max-width: 768px) {
-            font-size: 30px;
+            font-size: 36px;
         }
     }
 
-    .portfolio-grid {
-        display: flex;
-        flex-wrap: wrap; 
-        gap: 3rem;
-        justify-content: center;
-        max-width: 100%;
+    /* Conteneur pour la grille avec 3 cartes max par ligne */
+    .portfolio-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 cartes max par ligne */
+        gap: 2rem;
+        justify-items: center;
+        align-items: center;
         margin-top: 2rem;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne sur tablettes */
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr; /* 1 carte par ligne sur mobile */
+        }
     }
 
+    /* Style global des cartes */
     .portfolio-card {
-        flex: 1 1 45%;
-        max-width: 600px;
-        margin: 1rem;
-        opacity: 0;
-        transition: opacity 0.2s ease-out, transform 0.5s ease-out;
+        position: relative;
+        cursor: pointer;
+        border-radius: 12px;
+        width: 100%;
+        height: 350px; /* Carte de même taille */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        border: 3px solid #ea5f61;
 
         &:hover {
             transform: scale(1.05);
-            opacity: 0.9;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
         }
 
-        &.appear {
-            opacity: 1;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Image en cover */
         }
 
-        @media (max-width: 768px) {
-            flex: 1 1 100%;
+        /* Overlay */
+        .portfolio-card-overlay {
+            font-family: "Kanit", sans-serif;
+            font-weight: 600;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            border-radius: 0 0 12px 12px;
         }
     }
 }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  
+    &-content {
+      background: #333;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      max-height: 80%;
+      overflow: auto;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      font-family: "Montserrat", sans-serif;
+  
+      h2 {
+        font-family: "Kanit", sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+  
+      button {
+        margin-top: 15px;
+        padding: 10px 15px;
+        border: none;
+        background: #ea5f61;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+  
+        &:hover {
+          background: #c53e4e;
+        }
+      }
+    }
+  }
+  
