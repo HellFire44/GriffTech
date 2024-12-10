@@ -106,7 +106,7 @@ function Navbar() {
       </AppBar>
 
       {/* Drawer pour la version mobile */}
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
         <Box sx={{ width: 250, backgroundColor: '#1a1a1a', height: '100%', color: '#e0e0e0' }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
           <List>
             {navItems.map((item) => (

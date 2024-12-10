@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import './Services.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faReact } from '@fortawesome/free-brands-svg-icons'
-import { Slide, Fade } from '@mui/material';
+import { Fade } from '@mui/material';
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const servicesData = [
     // {
@@ -57,97 +59,60 @@ const servicesData = [
 ];
 
 function Services() {
-    const [showTitle, setShowTitle] = useState(false);
-    const [showCards, setShowCards] = useState([]);
-    const titleRef = useRef(null);
-
-    // Fonction pour vérifier si l'élément est visible dans la fenêtre
-    const checkIfVisible = () => {
-        if (titleRef.current) {
-            const rect = titleRef.current.getBoundingClientRect();
-            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                setShowTitle(true);
-            }
-        }
-
-        // Vérification des cartes
-        servicesData.forEach((service, index) => {
-            const cardRef = document.getElementById(`service-card-${service.id}`);
-            if (cardRef) {
-                const cardRect = cardRef.getBoundingClientRect();
-                if (cardRect.top >= 0 && cardRect.bottom <= window.innerHeight) {
-                    setShowCards(prev => [...prev, service.id]);
-                }
-            }
-        });
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', checkIfVisible);
-        checkIfVisible();  // Vérifier au chargement si le titre et les cartes sont visibles
-
-        return () => {
-            window.removeEventListener('scroll', checkIfVisible);
-        };
-    }, []);
-
     return (
-        <section className="section-services" id="section-services" aria-labelledby="services-heading">
-            {/* Animation du titre */}
-            <Slide direction="left" in={showTitle} timeout={1000}>
-                <h1 id="services-heading" ref={titleRef}>
-                    &lt; Mes Services /&gt;
-                </h1>
-            </Slide>
-
-            <div className="services-container">
-                {servicesData.map((service, index) => (
-                    <ServiceCard 
-                        key={service.id} 
-                        service={service} 
-                        showCard={showCards.includes(service.id)} 
-                        index={index} 
-                    />
-                ))}
-            </div>
-        </section>
+      <section className="section-services" id="section-services" aria-labelledby="services-heading">
+        {/* Animation du titre */}
+        <motion.h1 initial={{ x: "-100vw" }} animate={{ x: 0 }} transition={{ type: "spring", stiffness: 200, delay: 0.5 }}>
+          &lt; Mes Services /&gt;
+        </motion.h1>
+  
+        <div className="services-container">
+          {servicesData.map((service) => (
+            <ServiceCard key={service.id} service={service} />
+          ))}
+        </div>
+      </section>
     );
-}
-
-function ServiceCard({ service, showCard, index }) {
+  }
+  
+  function ServiceCard({ service }) {
+    const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1, });
+  
     const [isExpanded, setIsExpanded] = useState(false);
-
+  
     const toggleExpand = () => {
-        setIsExpanded((prev) => !prev);
+      setIsExpanded((prev) => !prev);
     };
-
+  
     return (
-        <Fade in={showCard} timeout={1000} style={{ transitionDelay: `${index * 300}ms` }}>
-            <div className="service-card" id={`service-card-${service.id}`}>
-                <div className={`card-inner ${isExpanded ? 'flipped' : ''}`}>
-                    <div className="card-front" onClick={toggleExpand}>
-                        <div className="icon">
-                            <FontAwesomeIcon icon={service.icon} size="3x" />
-                        </div>
-                        <h2>{service.title}</h2>
-                        <p className="description">{service.description}</p>
-                        <button className="read-more">
-                            Lire Plus
-                            <FontAwesomeIcon icon={faArrowRight} className={`arrow ${isExpanded ? "rotated" : ""}`} />
-                        </button>
-                    </div>
-                    <div className="card-back" onClick={toggleExpand}>
-                        <div className="icon">
-                            <FontAwesomeIcon icon={service.icon} size="3x" />
-                        </div>
-                        <h2>{service.title}</h2>
-                        <div className="detailed-description" dangerouslySetInnerHTML={{ __html: service.detailedDescription }} />
-                        <button className="read-less">Retour</button>
-                    </div>
+      <div ref={ref}>
+        <Fade in={inView} timeout={1000}>
+          <div className="service-card">
+            <div className={`card-inner ${isExpanded ? 'flipped' : ''}`}>
+              <div className="card-front" onClick={toggleExpand}>
+                <div className="icon">
+                  <FontAwesomeIcon icon={service.icon} size="3x" />
                 </div>
+                <h2>{service.title}</h2>
+                <p className="description">{service.description}</p>
+                <button className="read-more">
+                  Lire Plus
+                  <FontAwesomeIcon icon={faArrowRight} className={`arrow ${isExpanded ? "rotated" : ""}`} />
+                </button>
+              </div>
+              <div className="card-back" onClick={toggleExpand}>
+                <div className="icon">
+                  <FontAwesomeIcon icon={service.icon} size="3x" />
+                </div>
+                <h2>{service.title}</h2>
+                <div className="detailed-description" dangerouslySetInnerHTML={{ __html: service.detailedDescription }} />
+                <button className="read-less">Retour</button>
+              </div>
             </div>
+          </div>
         </Fade>
+      </div>
     );
-}
-
-export default Services;
+  }
+  
+  export default Services;

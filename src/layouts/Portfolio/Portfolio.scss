@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Section principale du portfolio */
 .portfolio {
     margin: 100px;
     padding: 50px 20px;
     text-align: center;
+    @media (max-width: 768px) {
+      margin: 5px;
+    }
 
-    /* Titre */
     h1 {
         font-family: "Kanit", sans-serif;
         font-style: italic;
@@ -17,67 +18,68 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
         @media (max-width: 768px) {
-            font-size: 36px;
+            font-size: 30px;
         }
     }
 
-    /* Conteneur pour la grille avec 3 cartes max par ligne */
     .portfolio-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 cartes max par ligne */
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
         justify-items: center;
         align-items: center;
         margin-top: 2rem;
 
         @media (max-width: 1024px) {
-            grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne sur tablettes */
+            grid-template-columns: repeat(2, 1fr);
         }
 
         @media (max-width: 768px) {
-            grid-template-columns: 1fr; /* 1 carte par ligne sur mobile */
+            grid-template-columns: 1fr;
         }
     }
 
-    /* Style global des cartes */
     .portfolio-card {
-        position: relative;
-        cursor: pointer;
-        border-radius: 12px;
-        width: 100%;
-        height: 350px; /* Carte de même taille */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden;
-        border: 3px solid #ea5f61;
-
-        &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Image en cover */
-        }
-
-        /* Overlay */
-        .portfolio-card-overlay {
-            font-family: "Kanit", sans-serif;
-            font-weight: 600;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            border-radius: 0 0 12px 12px;
-        }
-    }
+      position: relative;
+      cursor: pointer;
+      border-radius: 12px;
+      width: 100%;
+      height: 350px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      border: 3px solid #ea5f61;
+  
+      &:hover {
+        transform: scale(1.05)!important;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        z-index: 10;
+      }
+  
+      img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease; /* Ajout d'une animation sur l'image */
+      }
+  
+      .portfolio-card-overlay {
+          font-family: "Kanit", sans-serif;
+          font-weight: 600;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          padding: 10px;
+          background: rgba(0, 0, 0, 0.6);
+          color: white;
+          text-align: center;
+          text-transform: uppercase;
+          font-size: 1.2rem;
+          border-radius: 0 0 12px 12px;
+          transition: background 0.3s ease;
+      }
+  }
+  
 }
 
 .modal {
@@ -90,7 +92,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1002;
   
     &-content {
       background: #333;

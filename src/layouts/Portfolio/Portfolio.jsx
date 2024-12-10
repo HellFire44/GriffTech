@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import './Portfolio.scss';
 import Modal from "../../components/Modal/Modal";
-import { Slide } from '@mui/material';
 import IllustrationLesPixionautes from "../../assets/portfolio/illustration_lespixionautes.fr.webp";
 import IllustrationTournament from "../../assets/portfolio/illustration_tournament.webp";
 import IllustrationBoutique from "../../assets/portfolio/illustration_boutique.webp";
@@ -10,8 +11,12 @@ import IllustrationPixetmotion from "../../assets/portfolio/illustration_pixetmo
 
 const Portfolio = () => {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [showTitle, setShowTitle] = useState(false);
-  const titleRef = useRef(null);
+
+  // Observer pour détecter la visibilité de la section
+  const { ref: sectionRef, inView: sectionInView } = useInView({
+    triggerOnce: true, 
+    threshold: 0.1, 
+  });
 
   const projects = [
     {
@@ -25,14 +30,14 @@ const Portfolio = () => {
     {
       id: 2,
       title: "LesPixionautes.fr",
-      description: " Conçu pour le streamer Pix&Motion, le site LesPixionautes.fr regroupe sa chaîne Twitch et offre un espace dédié à sa communauté",
+      description: "Conçu pour le streamer Pix&Motion, le site LesPixionautes.fr regroupe sa chaîne Twitch et offre un espace dédié à sa communauté",
       image: IllustrationLesPixionautes,
       redirectionURL: "https://lespixionautes.fr",
     },
     {
       id: 3,
       title: "Shop LesPixionautes.fr",
-      description: "Le shop des Pixionautes.fr, conçu pour le streamer Pix&Motion, est entièrement développé sous WordPress, offrant une gestion simple et flexible des produits.,",
+      description: "Le shop des Pixionautes.fr, conçu pour le streamer Pix&Motion, est entièrement développé sous WordPress, offrant une gestion simple et flexible des produits.",
       image: IllustrationBoutique,
       redirectionURL: "https://boutiques.lespixionautes.fr/",
     },
@@ -60,19 +65,26 @@ const Portfolio = () => {
   };
 
   return (
-    <section className="portfolio" id="section-portfolio">
-        <h1 ref={titleRef}>&lt; Mon Portfolio /&gt;</h1>
+    <section className="portfolio" id="section-portfolio" ref={sectionRef}>
+      {/* Animation du titre */}
+      <motion.h1 initial={{ x: "-100vw" }} animate={sectionInView ? { x: 0 } : {}} transition={{ type: "spring", stiffness: 200, delay: 1 }}>
+        &lt; Mon Portfolio /&gt;
+      </motion.h1>
 
       <div className="portfolio-container">
-        {projects.map((project) => (
-          <div
-            className="portfolio-card"
-            key={project.id}
+        {projects.map((project, index) => (
+          <motion.div
+            className="portfolio-card" 
+            key={project.id} 
             onClick={() => openModal(project)}
-          >
+            animate={sectionInView ? { x: 0, opacity: 1 } : {}}
+            initial={{ x: "100vw", opacity: 0 }} 
+            whileHover={{ scale: 1.5 }}
+            transition={{delay: sectionInView ? 1 + index * 0.7 : 0, duration: 0.8, type: "spring"}}>
+              
             <img src={project.image} alt={project.title} />
             <div className="portfolio-card-overlay">{project.title}</div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
